@@ -113,9 +113,9 @@ Screenshot placeholder:
 If workspace-relative paths do not resolve correctly, use absolute paths:
 
 ```console
-/Users/ahmedabdelaziz/MyBrain/Topics/SW/GitRepo/baremetal_stm32_v2.2.0_Projects/2-UartTx/Inc
-/Users/ahmedabdelaziz/MyBrain/Topics/SW/GitRepo/baremetal_stm32_v2.2.0_Projects/chip_headers/CMSIS/Device/ST/STM32F0xx/Include
-/Users/ahmedabdelaziz/MyBrain/Topics/SW/GitRepo/baremetal_stm32_v2.2.0_Projects/chip_headers/CMSIS/Include
+<repo-root>/2-UartTx/Inc
+<repo-root>/chip_headers/CMSIS/Device/ST/STM32F0xx/Include
+<repo-root>/chip_headers/CMSIS/Include
 ```
 
 Important:
