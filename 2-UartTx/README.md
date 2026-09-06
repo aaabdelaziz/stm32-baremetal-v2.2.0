@@ -311,7 +311,7 @@ Before debugging from CubeIDE, STM32CubeProgrammer should be able to detect the 
 
 ### Application Loop
 
-`main.c` initializes USART2, then repeatedly sends the ASCII character `A` through the UART transmit helper.
+`main.c` initializes USART2, then repeatedly sends a null-terminated string through the UART transmit helper.
 
 ```c
 #include "uart.h"
@@ -322,7 +322,7 @@ int main(void)
 
     while (1)
     {
-        uart_transmit('A');
+        uart_transmit("A");
 
         for (volatile int i = 0; i < 100000; i++);
     }
@@ -331,10 +331,23 @@ int main(void)
 }
 ```
 
-The transmit helper waits for the hardware transmit data register to become empty, then writes one byte:
+The public transmit helper accepts a C string and sends it character by character until it reaches the string terminator `'\0'`:
 
 ```c
-void uart_transmit(uint8_t data)
+void uart_transmit(const char *send)
+{
+    while (*send != '\0')
+    {
+        uart_write_byte((uint8_t)*send);
+        send++;
+    }
+}
+```
+
+The private byte helper waits for the hardware transmit data register to become empty, then writes one byte:
+
+```c
+static void uart_write_byte(uint8_t data)
 {
     while (!(USART2->ISR & USART_ISR_TXE)) {}
 
@@ -356,7 +369,9 @@ Important data write:
 USART2->TDR = data
 ```
 
-When `data` is `'A'`, this loads the UART transmit data register with `0x41`.
+When the string is `"A"`, this loads the UART transmit data register with `0x41`.
+
+Do not use `sizeof(send)` inside `uart_transmit()` when `send` is a pointer. It gives the pointer size, not the string length. For a normal C string, loop until `'\0'`.
 
 ### UART Initialization
 

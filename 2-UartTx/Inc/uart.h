@@ -21,7 +21,7 @@
 
 void uart_tx_init(void);
 uint16_t compute_uart_bd(uint32_t periph_clk, uint32_t baudrate);
-void uart_transmit(uint8_t data);
+void uart_transmit(const char *send);
 
 
 #endif /* UART_H_ */

@@ -9,13 +9,22 @@
 #include "uart.h"
 
 
-void uart_transmit(uint8_t data)
+static void uart_write_byte(uint8_t data)
 {
     // Wait until TXE (Transmit data register empty) flag is set
     while (!(USART2->ISR & USART_ISR_TXE)) {}
 
     // Send one byte, for example ASCII 'A' = 0x41
     USART2->TDR = data;
+}
+
+void uart_transmit(const char *send)
+{
+    while (*send != '\0')
+    {
+        uart_write_byte((uint8_t)*send);
+        send++;
+    }
 }
 
 void uart_tx_init(void)
