@@ -9,6 +9,15 @@
 #include "uart.h"
 
 
+void uart_transmit(uint8_t data)
+{
+    // Wait until TXE (Transmit data register empty) flag is set
+    while (!(USART2->ISR & USART_ISR_TXE)) {}
+
+    // Send one byte, for example ASCII 'A' = 0x41
+    USART2->TDR = data;
+}
+
 void uart_tx_init(void)
 {
     /************ Configure UART GPIO pins ************/

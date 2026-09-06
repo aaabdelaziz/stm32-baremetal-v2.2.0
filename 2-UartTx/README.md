@@ -311,7 +311,7 @@ Before debugging from CubeIDE, STM32CubeProgrammer should be able to detect the 
 
 ### Application Loop
 
-`main.c` initializes USART2, waits for the transmit data register to become empty, and writes the ASCII character `A`.
+`main.c` initializes USART2, then repeatedly sends the ASCII character `A` through the UART transmit helper.
 
 ```c
 #include "uart.h"
@@ -322,9 +322,7 @@ int main(void)
 
     while (1)
     {
-        while (!(USART2->ISR & USART_ISR_TXE)) {}
-
-        USART2->TDR = 'A';
+        uart_transmit('A');
 
         for (volatile int i = 0; i < 100000; i++);
     }
@@ -333,7 +331,18 @@ int main(void)
 }
 ```
 
-Important register:
+The transmit helper waits for the hardware transmit data register to become empty, then writes one byte:
+
+```c
+void uart_transmit(uint8_t data)
+{
+    while (!(USART2->ISR & USART_ISR_TXE)) {}
+
+    USART2->TDR = data;
+}
+```
+
+Important register check:
 
 ```console
 USART2->ISR & USART_ISR_TXE
@@ -341,13 +350,13 @@ USART2->ISR & USART_ISR_TXE
 
 This checks whether the transmit data register is empty.
 
-Important write:
+Important data write:
 
 ```console
-USART2->TDR = 'A'
+USART2->TDR = data
 ```
 
-This loads the UART transmit data register with `0x41`.
+When `data` is `'A'`, this loads the UART transmit data register with `0x41`.
 
 ### UART Initialization
 
