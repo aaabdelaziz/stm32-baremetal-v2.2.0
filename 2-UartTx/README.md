@@ -49,7 +49,7 @@ File > Import... > General > Existing Projects into Workspace
 
 Screenshot placeholder:
 
-![STM32CubeIDE import existing projects](docs/images/stm32cubeide-import-existing-projects.png)
+![STM32CubeIDE import existing projects](../docs/images/stm32cubeide-import-existing-projects.png)
 
 Import both:
 
@@ -60,7 +60,7 @@ chip_headers
 
 Screenshot placeholder:
 
-![STM32CubeIDE import 2-UartTx and chip_headers](docs/images/stm32cubeide-import-uart-and-chip-headers.png)
+![STM32CubeIDE import 2-UartTx and chip_headers](../docs/images/stm32cubeide-import-uart-and-chip-headers.png)
 
 The `chip_headers` project/folder is required because `uart.h` includes:
 
@@ -86,7 +86,7 @@ Include paths
 
 Screenshot placeholder:
 
-![STM32CubeIDE compiler include paths page](docs/images/stm32cubeide-compiler-include-paths-page.png)
+![STM32CubeIDE compiler include paths page](../docs/images/stm32cubeide-compiler-include-paths-page.png)
 
 Set:
 
@@ -96,7 +96,7 @@ Configuration: All configurations
 
 Screenshot placeholder:
 
-![STM32CubeIDE all configurations selected](docs/images/stm32cubeide-all-configurations.png)
+![STM32CubeIDE all configurations selected](../docs/images/stm32cubeide-all-configurations.png)
 
 Add:
 
@@ -108,7 +108,7 @@ Add:
 
 Screenshot placeholder:
 
-![STM32CubeIDE required compiler include paths](docs/images/stm32cubeide-required-compiler-include-paths.png)
+![STM32CubeIDE required compiler include paths](../docs/images/stm32cubeide-required-compiler-include-paths.png)
 
 If workspace-relative paths do not resolve correctly, use absolute paths:
 
@@ -143,7 +143,7 @@ Preprocessor
 
 Screenshot placeholder:
 
-![STM32CubeIDE compiler preprocessor symbols page](docs/images/stm32cubeide-compiler-preprocessor-symbols-page.png)
+![STM32CubeIDE compiler preprocessor symbols page](../docs/images/stm32cubeide-compiler-preprocessor-symbols-page.png)
 
 Set:
 
@@ -162,7 +162,7 @@ STM32F091xC
 
 Screenshot placeholder:
 
-![STM32CubeIDE required compiler preprocessor symbols](docs/images/stm32cubeide-required-compiler-symbols.png)
+![STM32CubeIDE required compiler preprocessor symbols](../docs/images/stm32cubeide-required-compiler-symbols.png)
 
 The critical symbol is:
 
@@ -197,7 +197,7 @@ GNU C
 
 Screenshot placeholder:
 
-![STM32CubeIDE indexer include paths page](docs/images/stm32cubeide-indexer-include-paths-page.png)
+![STM32CubeIDE indexer include paths page](../docs/images/stm32cubeide-indexer-include-paths-page.png)
 
 Add the same include paths:
 
@@ -215,7 +215,7 @@ C/C++ General > Paths and Symbols > Symbols > GNU C
 
 Screenshot placeholder:
 
-![STM32CubeIDE indexer symbols page](docs/images/stm32cubeide-indexer-symbols-page.png)
+![STM32CubeIDE indexer symbols page](../docs/images/stm32cubeide-indexer-symbols-page.png)
 
 Add:
 
@@ -242,7 +242,7 @@ Project > Clean...
 
 Screenshot placeholder:
 
-![STM32CubeIDE clean project dialog](docs/images/stm32cubeide-clean-project-dialog.png)
+![STM32CubeIDE clean project dialog](../docs/images/stm32cubeide-clean-project-dialog.png)
 
 Select:
 
@@ -258,7 +258,7 @@ Right-click 2-UartTx > Build Project
 
 Screenshot placeholder:
 
-![STM32CubeIDE build project command](docs/images/stm32cubeide-build-project-command.png)
+![STM32CubeIDE build project command](../docs/images/stm32cubeide-build-project-command.png)
 
 A successful build ends with:
 
@@ -279,7 +279,7 @@ Build Configurations > Set Active > Debug
 
 Screenshot placeholder:
 
-![STM32CubeIDE set active debug configuration](docs/images/stm32cubeide-set-active-debug-configuration.png)
+![STM32CubeIDE set active debug configuration](../docs/images/stm32cubeide-set-active-debug-configuration.png)
 
 Then:
 
@@ -290,7 +290,7 @@ Debug As > STM32 Cortex-M C/C++ Application
 
 Screenshot placeholder:
 
-![STM32CubeIDE debug as STM32 Cortex-M application](docs/images/stm32cubeide-debug-as-cortex-m-application.png)
+![STM32CubeIDE debug as STM32 Cortex-M application](../docs/images/stm32cubeide-debug-as-cortex-m-application.png)
 
 Recommended debug settings:
 
@@ -303,7 +303,7 @@ SWV:         Disabled
 
 Screenshot placeholder:
 
-![STM32CubeIDE debug configuration settings](docs/images/stm32cubeide-debug-configuration-settings.png)
+![STM32CubeIDE debug configuration settings](../docs/images/stm32cubeide-debug-configuration-settings.png)
 
 Before debugging from CubeIDE, STM32CubeProgrammer should be able to detect the ST-LINK. If STM32CubeProgrammer reports `No ST-LINK detected`, CubeIDE will not be able to flash.
 
@@ -567,7 +567,7 @@ One full UART frame is:
 
 The following capture shows the UART decoder reading `0x41`, which is ASCII `A`.
 
-![UART logic analyzer proof for ASCII A](docs/images/uart-a-logic-analyzer-proof.png)
+![UART logic analyzer proof for ASCII A](../docs/images/uart-a-logic-analyzer-proof.png)
 
 This proves that the firmware is transmitting the expected character with the correct UART framing.
 
