@@ -6,22 +6,25 @@
   <title>STM32 Bare-Metal Projects Documentation</title>
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f4f7f8;
-      --panel: #ffffff;
-      --ink: #1c2430;
-      --muted: #5c6675;
-      --line: #d8e0e7;
-      --brand: #0f6674;
-      --brand-2: #2e7d61;
+      color-scheme: dark;
+      --bg: #081116;
+      --bg-2: #0d1b22;
+      --panel: #101b22;
+      --panel-2: #14232c;
+      --ink: #e8f1f4;
+      --muted: #9fb1ba;
+      --line: #27404b;
+      --brand: #62d8c6;
+      --brand-2: #8fe388;
       --warn: #a45d14;
-      --accent: #b46621;
-      --code-bg: #101720;
-      --code-ink: #eaf0f4;
-      --soft-blue: #e8f3f7;
-      --soft-green: #e9f5ef;
-      --soft-amber: #fff4df;
-      --shadow: 0 18px 45px rgba(28, 36, 48, 0.08);
+      --accent: #f0b35a;
+      --danger: #ff7777;
+      --code-bg: #060b10;
+      --code-ink: #dff7ee;
+      --soft-blue: #102a33;
+      --soft-green: #102a28;
+      --soft-amber: #2c2414;
+      --shadow: 0 20px 55px rgba(0, 0, 0, 0.34);
     }
 
     * {
@@ -34,15 +37,16 @@
       line-height: 1.6;
       color: var(--ink);
       background:
-        linear-gradient(180deg, #eef5f6 0, var(--bg) 310px),
+        linear-gradient(180deg, #112833 0, var(--bg) 360px),
+        linear-gradient(90deg, rgba(98, 216, 198, 0.08), rgba(240, 179, 90, 0.06)),
         var(--bg);
     }
 
     header {
-      background: #12232b;
+      background: linear-gradient(135deg, #0d1a22, #122c33 58%, #173225);
       color: #ffffff;
       padding: 48px 24px 36px;
-      border-bottom: 5px solid var(--brand-2);
+      border-bottom: 1px solid #2f605d;
     }
 
     header .wrap,
@@ -61,7 +65,7 @@
     header p {
       max-width: 800px;
       margin: 0;
-      color: #d7e4ea;
+      color: #bdd3d9;
       font-size: 17px;
     }
 
@@ -70,7 +74,7 @@
     }
 
     nav {
-      background: var(--panel);
+      background: rgba(16, 27, 34, 0.92);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 14px;
@@ -91,7 +95,7 @@
     }
 
     section {
-      background: var(--panel);
+      background: linear-gradient(180deg, rgba(20, 35, 44, 0.96), rgba(13, 25, 32, 0.96));
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 22px;
@@ -102,7 +106,7 @@
     h2 {
       margin: 0 0 14px;
       font-size: 25px;
-      color: #12313f;
+      color: #dff9f3;
       letter-spacing: 0;
     }
 
@@ -137,12 +141,12 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 16px;
-      background: #fbfcfd;
+      background: linear-gradient(180deg, rgba(18, 38, 47, 0.98), rgba(13, 27, 34, 0.98));
       transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
     }
 
     .project:hover {
-      border-color: #b8c8d1;
+      border-color: #40706f;
       transform: translateY(-1px);
       box-shadow: 0 12px 26px rgba(28, 36, 48, 0.08);
     }
@@ -156,7 +160,7 @@
       padding: 3px 9px;
       border-radius: 999px;
       background: var(--soft-blue);
-      color: #174b5d;
+      color: #9ce7dc;
       font-size: 12px;
       font-weight: 700;
       margin-bottom: 8px;
@@ -195,11 +199,15 @@
 
     th {
       background: #e7f0f1;
-      color: #163440;
+      color: #dff9f3;
     }
 
     tr:nth-child(even) td {
-      background: #fbfcfd;
+      background: rgba(17, 35, 43, 0.74);
+    }
+
+    td {
+      background: rgba(11, 22, 29, 0.7);
     }
 
     code {
@@ -208,8 +216,8 @@
     }
 
     :not(pre) > code {
-      background: #edf3f5;
-      color: #12313f;
+      background: #18313a;
+      color: #aef0df;
       padding: 2px 5px;
       border-radius: 5px;
     }
