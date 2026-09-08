@@ -27,6 +27,7 @@ Style:      Bare-metal register programming
 ├── docs/
 │   ├── images/
 │   └── tools/
+├── index.html
 ├── documentation.html
 └── README.md
 ```
@@ -38,11 +39,11 @@ Style:      Bare-metal register programming
 <!-- MODULE_INDEX_START -->
 | Project | Peripheral | What It Demonstrates | README | HTML Guide |
 | --- | --- | --- | --- | --- |
-| `0-LedToggling` | GPIO output | Enable GPIOA and toggle PA5 / LD2 | [README](0-LedToggling/README.md) | [HTML](0-LedToggling/documentation.html) |
-| `1-ButtonLedControl` | GPIO input/output | Read PC13 user button and drive PA5 LED | [README](1-ButtonLedControl/README.md) | [HTML](1-ButtonLedControl/documentation.html) |
-| `2-UartTx` | USART2 transmit | Send ASCII `A` on PA2 at 9600 baud | [README](2-UartTx/README.md) | [HTML](2-UartTx/documentation.html) |
-| `3-ADC` | ADC1 | Read internal temperature sensor channel 16 | [README](3-ADC/README.md) | [HTML](3-ADC/documentation.html) |
-| `4-UartTxRx` | USART2 transmit/receive | Receive terminal text on PA3 and echo it on PA2 | [README](4-UartTxRx/README.md) | [HTML](4-UartTxRx/documentation.html) |
+| `0-LedToggling` | GPIO output | Enable GPIOA and toggle PA5 / LD2 | [README](0-LedToggling/README.md) | [HTML](0-LedToggling/index.html) |
+| `1-ButtonLedControl` | GPIO input/output | Read PC13 user button and drive PA5 LED | [README](1-ButtonLedControl/README.md) | [HTML](1-ButtonLedControl/index.html) |
+| `2-UartTx` | USART2 transmit | Send ASCII `A` on PA2 at 9600 baud | [README](2-UartTx/README.md) | [HTML](2-UartTx/index.html) |
+| `3-ADC` | ADC1 | Read internal temperature sensor channel 16 | [README](3-ADC/README.md) | [HTML](3-ADC/index.html) |
+| `4-UartTxRx` | USART2 transmit/receive | Receive terminal text on PA3 and echo it on PA2 | [README](4-UartTxRx/README.md) | [HTML](4-UartTxRx/index.html) |
 <!-- MODULE_INDEX_END -->
 
 Each peripheral README includes:
@@ -57,19 +58,19 @@ Troubleshooting notes
 Screenshot placeholders under docs/images
 ```
 
-The browser-friendly documentation entry point is:
+The browser-friendly documentation entry points are:
 
-[documentation.html](documentation.html)
+[index.html](index.html) for clean GitHub Pages hosting, and [documentation.html](documentation.html) as an explicit local documentation file.
 
 ## Adding A New Peripheral Project
 
-When a new peripheral/module project is added, create its local `README.md`, then regenerate the module HTML pages:
+When a new peripheral/module project is added, create its local `README.md`, then regenerate the module HTML pages and root indexes:
 
 ```console
 node docs/tools/generate-module-html.mjs
 ```
 
-The generator scans numeric project folders such as `5-SpiTx/`, creates or refreshes `documentation.html` beside each module README, updates the root Peripheral Guides table, and updates the main [documentation.html](documentation.html) project cards.
+The generator scans numeric project folders such as `5-SpiTx/`, creates or refreshes `index.html` and `documentation.html` beside each module README, updates the root Peripheral Guides table, updates the main [documentation.html](documentation.html) project cards, and refreshes the root [index.html](index.html) for GitHub Pages.
 
 ## Troubleshooting History
 

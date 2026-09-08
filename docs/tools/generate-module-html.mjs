@@ -109,7 +109,7 @@ function getModuleInfo(moduleName) {
 function renderReadmeModuleIndex() {
   const rows = modules.map((moduleName) => {
     const info = getModuleInfo(moduleName);
-    return `| \`${moduleName}\` | ${info.peripheral} | ${info.summary} | [README](${moduleName}/README.md) | [HTML](${moduleName}/documentation.html) |`;
+    return `| \`${moduleName}\` | ${info.peripheral} | ${info.summary} | [README](${moduleName}/README.md) | [HTML](${moduleName}/index.html) |`;
   });
 
   return [
@@ -128,7 +128,7 @@ ${modules
           <span class="tag">${escapeHtml(info.tag)}</span>
           <h3>${escapeHtml(moduleName)}</h3>
           <p>${escapeHtml(info.card)}</p>
-          <p><a href="${moduleName}/documentation.html">Open HTML guide</a> | <a href="${moduleName}/README.md">README</a></p>
+          <p><a href="${moduleName}/">Open HTML guide</a> | <a href="${moduleName}/README.md">README</a></p>
         </article>`;
   })
   .join("\n\n")}
@@ -253,32 +253,38 @@ function pageTemplate(moduleName, body) {
   <style>
     :root {
       color-scheme: light;
-      --bg: #f6f7f9;
+      --bg: #f4f7f8;
       --panel: #ffffff;
       --ink: #1c2430;
       --muted: #5c6675;
-      --line: #d9dee7;
-      --brand: #176b87;
-      --brand-2: #2f8f6f;
-      --code-bg: #111827;
-      --code-ink: #e5e7eb;
+      --line: #d8e0e7;
+      --brand: #0f6674;
+      --brand-2: #2e7d61;
+      --accent: #b46621;
+      --code-bg: #101720;
+      --code-ink: #eaf0f4;
+      --soft: #eef6f4;
+      --shadow: 0 18px 45px rgba(28, 36, 48, 0.08);
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       line-height: 1.6;
       color: var(--ink);
-      background: var(--bg);
+      background:
+        linear-gradient(180deg, #eef5f6 0, var(--bg) 310px),
+        var(--bg);
     }
     header {
-      background: #13212b;
+      background: #12232b;
       color: #fff;
-      padding: 36px 22px 28px;
-      border-bottom: 6px solid var(--brand-2);
+      padding: 42px 22px 34px;
+      border-bottom: 5px solid var(--brand-2);
     }
     header .wrap, main { max-width: 1080px; margin: 0 auto; }
-    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.15; letter-spacing: 0; }
+    h1 { margin: 0 0 8px; font-size: clamp(30px, 4vw, 44px); line-height: 1.12; letter-spacing: 0; }
     header p { margin: 0; color: #d7e4ea; }
     main { padding: 24px 18px 52px; }
     nav {
@@ -287,27 +293,37 @@ function pageTemplate(moduleName, body) {
       border-radius: 8px;
       padding: 12px 14px;
       margin-bottom: 18px;
+      box-shadow: var(--shadow);
     }
-    a { color: var(--brand); font-weight: 650; }
+    a { color: var(--brand); font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--accent); }
     section {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 22px;
+      padding: clamp(18px, 3vw, 30px);
+      box-shadow: var(--shadow);
     }
-    h2 { margin: 24px 0 10px; color: #12313f; letter-spacing: 0; }
+    h2 { margin: 28px 0 10px; color: #12313f; letter-spacing: 0; border-top: 1px solid var(--line); padding-top: 22px; }
+    h2:first-of-type { border-top: 0; padding-top: 0; }
     h3, h4, h5 { margin: 22px 0 8px; letter-spacing: 0; }
-    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
-    th, td { border: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; }
-    th { background: #eef3f6; }
+    p { max-width: 82ch; }
+    ul { padding-left: 22px; }
+    li { margin: 4px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: 14px; border-radius: 8px; overflow: hidden; }
+    th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: #e7f0f1; color: #163440; }
+    tr:nth-child(even) td { background: #fbfcfd; }
     code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.94em; }
+    :not(pre) > code { background: #edf3f5; color: #12313f; padding: 2px 5px; border-radius: 5px; }
     pre {
       overflow-x: auto;
       background: var(--code-bg);
       color: var(--code-ink);
-      padding: 14px;
+      padding: 16px;
       border-radius: 8px;
       border: 1px solid #0b1220;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
     }
     pre code { color: inherit; }
     .proof {
@@ -316,8 +332,21 @@ function pageTemplate(moduleName, body) {
       border-radius: 8px;
       margin: 10px 0 18px;
       background: #000;
+      box-shadow: 0 12px 30px rgba(28, 36, 48, 0.12);
     }
-    .note { color: var(--muted); font-size: 14px; }
+    .note {
+      color: #334155;
+      font-size: 14px;
+      background: var(--soft);
+      border-left: 4px solid var(--brand-2);
+      padding: 12px 14px;
+      border-radius: 6px;
+    }
+    @media (max-width: 720px) {
+      header { padding: 30px 18px 24px; }
+      main { padding: 16px 12px 40px; }
+      table { display: block; overflow-x: auto; }
+    }
   </style>
 </head>
 <body>
@@ -329,11 +358,11 @@ function pageTemplate(moduleName, body) {
   </header>
   <main>
     <nav>
-      <a href="../documentation.html">Main documentation</a> |
+      <a href="../">Main documentation</a> |
       <a href="README.md">Markdown README</a>
     </nav>
     <section>
-      <p class="note">Generated by <code>docs/tools/generate-module-html.mjs</code>. Edit <code>README.md</code>, then run the generator to refresh this page.</p>
+      <p class="note">Generated by <code>docs/tools/generate-module-html.mjs</code>. Edit <code>README.md</code>, then run the generator to refresh <code>index.html</code> and <code>documentation.html</code>.</p>
 ${body}
     </section>
   </main>
@@ -344,11 +373,14 @@ ${body}
 
 for (const moduleName of modules) {
   const readmePath = path.join(root, moduleName, "README.md");
-  const outputPath = path.join(root, moduleName, "documentation.html");
+  const documentationPath = path.join(root, moduleName, "documentation.html");
+  const indexPath = path.join(root, moduleName, "index.html");
   const markdown = fs.readFileSync(readmePath, "utf8");
   const html = pageTemplate(moduleName, renderMarkdown(markdown));
-  fs.writeFileSync(outputPath, html);
-  console.log(`Generated ${path.relative(root, outputPath)}`);
+  fs.writeFileSync(documentationPath, html);
+  fs.writeFileSync(indexPath, html);
+  console.log(`Generated ${path.relative(root, documentationPath)}`);
+  console.log(`Generated ${path.relative(root, indexPath)}`);
 }
 
 const readmePath = path.join(root, "README.md");
@@ -366,5 +398,8 @@ fs.writeFileSync(
   replaceGeneratedBlock(mainHtml, "<!-- MODULE_CARDS_START -->", "<!-- MODULE_CARDS_END -->", renderHtmlModuleCards()),
 );
 console.log("Updated documentation.html module cards");
+
+fs.copyFileSync(mainHtmlPath, path.join(root, "index.html"));
+console.log("Updated index.html GitHub Pages entry point");
 
 console.log(`Generated ${modules.length} module HTML page(s).`);
