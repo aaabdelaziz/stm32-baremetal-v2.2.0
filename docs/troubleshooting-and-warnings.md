@@ -59,6 +59,64 @@ ${workspace_loc:/chip_headers/CMSIS/Include}
 
 `C/C++ General > Paths and Symbols` is mostly for the editor/indexer. It helps autocomplete and red squiggles, but it does not replace the real build settings under `C/C++ Build`.
 
+## 1A. Importing Old STM32CubeIDE Projects Into v2.2.0
+
+### Symptom
+
+Older projects created in STM32CubeIDE v1.13 need to be opened in STM32CubeIDE v2.2.0.
+
+### Correct Import Flow
+
+Use:
+
+```console
+File > Import...
+General > Existing Projects into Workspace
+```
+
+![STM32CubeIDE File Import menu](images/stm32cubeide-import-01-file-menu.png)
+
+![STM32CubeIDE Existing Projects into Workspace](images/stm32cubeide-import-02-existing-projects-wizard.png)
+
+Select the repository root that contains the old projects:
+
+![STM32CubeIDE select import root folder](images/stm32cubeide-import-04-select-root-folder.png)
+
+Enable:
+
+```console
+Search for nested projects
+Copy projects into workspace
+```
+
+Then select the projects and `chip_headers`:
+
+![STM32CubeIDE selected projects for import](images/stm32cubeide-import-05-select-projects-copy-to-workspace.png)
+
+After import, Project Explorer should show the imported projects:
+
+![STM32CubeIDE Project Explorer after import](images/stm32cubeide-import-06-project-explorer-result.png)
+
+### Already Exists Warning
+
+If CubeIDE shows:
+
+```console
+Some projects cannot be imported because they already exist in the workspace
+```
+
+it means the current workspace already has projects with the same Eclipse project names.
+
+![STM32CubeIDE projects already exist warning](images/stm32cubeide-import-03-projects-already-exist.png)
+
+Fix options:
+
+```console
+Use a fresh workspace
+Delete the old project from the workspace without deleting files from disk
+Uncheck projects that already exist and import only missing projects
+```
+
 ## 2. Device Selection Error From `stm32f0xx.h`
 
 ### Symptom

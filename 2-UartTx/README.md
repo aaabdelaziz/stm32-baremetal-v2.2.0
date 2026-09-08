@@ -41,6 +41,12 @@ chip_headers/CMSIS/Include
 
 ## STM32CubeIDE Import
 
+For the full STM32CubeIDE v1.13-to-v2.2.0 import flow with screenshots, see the root repository README section:
+
+```console
+Import Old Projects Into STM32CubeIDE 2.2.0
+```
+
 Import the project as an existing Eclipse/STM32CubeIDE project:
 
 ```console

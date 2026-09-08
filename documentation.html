@@ -288,11 +288,33 @@
 
     <section id="cubeide">
       <h2>STM32CubeIDE Setup</h2>
-      <h3>Import</h3>
+      <h3>Import Old Projects From v1.13 Into v2.2.0</h3>
       <pre><code>File &gt; Import... &gt; General &gt; Existing Projects into Workspace</code></pre>
       <p>Import the project folders and the shared <code>chip_headers</code> folder. Use an external workspace folder, not the repository root.</p>
 
-      <div class="placeholder">Image placeholder: <code>docs/images/stm32cubeide-import-existing-projects.png</code></div>
+      <h3>Step 1: File Menu</h3>
+      <p>Open the import wizard from <code>File &gt; Import...</code>.</p>
+      <img class="proof" src="docs/images/stm32cubeide-import-01-file-menu.png" alt="STM32CubeIDE File Import menu">
+
+      <h3>Step 2: Existing Projects Wizard</h3>
+      <p>Select <code>General &gt; Existing Projects into Workspace</code>, then press <code>Next</code>.</p>
+      <img class="proof" src="docs/images/stm32cubeide-import-02-existing-projects-wizard.png" alt="STM32CubeIDE Existing Projects into Workspace wizard">
+
+      <h3>Step 3: Choose Root Directory</h3>
+      <p>Use <code>Browse...</code> and select the folder that contains the old project folders.</p>
+      <img class="proof" src="docs/images/stm32cubeide-import-04-select-root-folder.png" alt="STM32CubeIDE select old project root folder">
+
+      <h3>Step 4: Select Projects</h3>
+      <p>Enable <code>Search for nested projects</code> and <code>Copy projects into workspace</code>, then select the firmware projects and <code>chip_headers</code>.</p>
+      <img class="proof" src="docs/images/stm32cubeide-import-05-select-projects-copy-to-workspace.png" alt="STM32CubeIDE select projects and copy into workspace">
+
+      <h3>Step 5: Existing Project Warning</h3>
+      <p>If CubeIDE says projects already exist, use a fresh workspace or uncheck the projects that are already imported.</p>
+      <img class="proof" src="docs/images/stm32cubeide-import-03-projects-already-exist.png" alt="STM32CubeIDE warning for projects already existing in workspace">
+
+      <h3>Step 6: Confirm Project Explorer</h3>
+      <p>After import, Project Explorer should show the firmware projects and <code>chip_headers</code>.</p>
+      <img class="proof" src="docs/images/stm32cubeide-import-06-project-explorer-result.png" alt="STM32CubeIDE Project Explorer after import">
 
       <h3>Compiler Include Paths</h3>
       <pre><code>Right-click project

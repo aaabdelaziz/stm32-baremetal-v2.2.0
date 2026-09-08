@@ -59,17 +59,70 @@ The full warning/error log with root causes and fixes is documented here:
 
 [docs/troubleshooting-and-warnings.md](docs/troubleshooting-and-warnings.md)
 
-## Quick Start
+## Import Old Projects Into STM32CubeIDE 2.2.0
 
-Use an external STM32CubeIDE workspace folder. Do not use this repository root as the workspace.
+Use this flow when importing older STM32CubeIDE projects, for example projects created with STM32CubeIDE v1.13 and opened later in STM32CubeIDE v2.2.0.
+
+Important workspace rule:
 
 ```console
-File > Import... > General > Existing Projects into Workspace
+Use a separate STM32CubeIDE workspace folder.
+Do not use the Git repository root as the workspace itself.
 ```
 
-![Import existing projects](docs/images/stm32cubeide-import-existing-projects.png)
+### Step 1: Open The Import Menu
 
-Select the repository root and import:
+From the top menu:
+
+```console
+File > Import...
+```
+
+![STM32CubeIDE File Import menu](docs/images/stm32cubeide-import-01-file-menu.png)
+
+### Step 2: Select Existing Eclipse Projects
+
+In the Import dialog, choose:
+
+```console
+General > Existing Projects into Workspace
+```
+
+Then press:
+
+```console
+Next
+```
+
+![STM32CubeIDE Existing Projects into Workspace](docs/images/stm32cubeide-import-02-existing-projects-wizard.png)
+
+### Step 3: Browse To The Old Project Repository Root
+
+Choose:
+
+```console
+Select root directory
+Browse...
+```
+
+Then select the folder that contains the project folders, for example:
+
+```console
+bare-metal-stm32/
+```
+
+![STM32CubeIDE select import root folder](docs/images/stm32cubeide-import-04-select-root-folder.png)
+
+### Step 4: Select Projects To Import
+
+Enable:
+
+```console
+Search for nested projects
+Copy projects into workspace
+```
+
+Select the firmware projects and the shared header project:
 
 ```console
 0-LedToggling
@@ -80,7 +133,43 @@ Select the repository root and import:
 chip_headers
 ```
 
-![Import selected projects](docs/images/stm32cubeide-import-selected-projects.png)
+Then press:
+
+```console
+Finish
+```
+
+![STM32CubeIDE selected projects for import](docs/images/stm32cubeide-import-05-select-projects-copy-to-workspace.png)
+
+### Step 5: If CubeIDE Says Projects Already Exist
+
+If the Import dialog says:
+
+```console
+Some projects cannot be imported because they already exist in the workspace
+```
+
+then the project names are already present in the current workspace. You have three clean options:
+
+```console
+Use a fresh workspace
+Delete the old project from the workspace without deleting files from disk
+Uncheck projects that already exist and import only the missing ones
+```
+
+![STM32CubeIDE projects already exist warning](docs/images/stm32cubeide-import-03-projects-already-exist.png)
+
+### Step 6: Confirm Project Explorer
+
+After import, Project Explorer should show the project folders and `chip_headers`.
+
+![STM32CubeIDE Project Explorer after import](docs/images/stm32cubeide-import-06-project-explorer-result.png)
+
+For this repository, `chip_headers` is important because projects using CMSIS include:
+
+```c
+#include "stm32f0xx.h"
+```
 
 ## Required STM32CubeIDE Settings
 

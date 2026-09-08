@@ -40,6 +40,12 @@ So it requires the shared `chip_headers` project/folder to be imported.
 
 ## STM32CubeIDE Import
 
+For the full STM32CubeIDE v1.13-to-v2.2.0 import flow with screenshots, see the root repository README section:
+
+```console
+Import Old Projects Into STM32CubeIDE 2.2.0
+```
+
 ```console
 File > Import... > General > Existing Projects into Workspace
 ```
