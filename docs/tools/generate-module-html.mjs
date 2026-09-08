@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = path.resolve(new URL("../..", import.meta.url).pathname);
+const githubPagesBaseUrl = "https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/";
 
 const modules = fs
   .readdirSync(root, { withFileTypes: true })
@@ -109,12 +110,12 @@ function getModuleInfo(moduleName) {
 function renderReadmeModuleIndex() {
   const rows = modules.map((moduleName) => {
     const info = getModuleInfo(moduleName);
-    return `| \`${moduleName}\` | ${info.peripheral} | ${info.summary} | [README](${moduleName}/README.md) | [HTML](${moduleName}/index.html) |`;
+    return `| \`${moduleName}\` | ${info.peripheral} | ${info.summary} | [README](${moduleName}/README.md) | [Local HTML](${moduleName}/index.html) | [GitHub Pages](${githubPagesBaseUrl}${moduleName}/) |`;
   });
 
   return [
-    "| Project | Peripheral | What It Demonstrates | README | HTML Guide |",
-    "| --- | --- | --- | --- | --- |",
+    "| Project | Peripheral | What It Demonstrates | README | Local HTML | Live HTML |",
+    "| --- | --- | --- | --- | --- | --- |",
     ...rows,
   ].join("\n");
 }

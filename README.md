@@ -2,6 +2,24 @@
 
 This repository contains focused bare-metal examples for the STM32F091RC / NUCLEO-F091RC board. Each project demonstrates one peripheral concept using direct register programming, CMSIS headers, and STM32CubeIDE project metadata.
 
+## Live HTML Documentation
+
+The GitHub Pages documentation site is:
+
+[https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/)
+
+Direct peripheral HTML pages:
+
+| Project | GitHub Pages HTML |
+| --- | --- |
+| `0-LedToggling` | [Open page](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/0-LedToggling/) |
+| `1-ButtonLedControl` | [Open page](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/1-ButtonLedControl/) |
+| `2-UartTx` | [Open page](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/2-UartTx/) |
+| `3-ADC` | [Open page](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/3-ADC/) |
+| `4-UartTxRx` | [Open page](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/4-UartTxRx/) |
+
+These links work after the HTML files are committed, pushed, and GitHub Pages is enabled from the repository `main` branch root.
+
 ## Target Platform
 
 ```console
@@ -37,13 +55,13 @@ Style:      Bare-metal register programming
 ## Peripheral Guides
 
 <!-- MODULE_INDEX_START -->
-| Project | Peripheral | What It Demonstrates | README | HTML Guide |
-| --- | --- | --- | --- | --- |
-| `0-LedToggling` | GPIO output | Enable GPIOA and toggle PA5 / LD2 | [README](0-LedToggling/README.md) | [HTML](0-LedToggling/index.html) |
-| `1-ButtonLedControl` | GPIO input/output | Read PC13 user button and drive PA5 LED | [README](1-ButtonLedControl/README.md) | [HTML](1-ButtonLedControl/index.html) |
-| `2-UartTx` | USART2 transmit | Send ASCII `A` on PA2 at 9600 baud | [README](2-UartTx/README.md) | [HTML](2-UartTx/index.html) |
-| `3-ADC` | ADC1 | Read internal temperature sensor channel 16 | [README](3-ADC/README.md) | [HTML](3-ADC/index.html) |
-| `4-UartTxRx` | USART2 transmit/receive | Receive terminal text on PA3 and echo it on PA2 | [README](4-UartTxRx/README.md) | [HTML](4-UartTxRx/index.html) |
+| Project | Peripheral | What It Demonstrates | README | Local HTML | Live HTML |
+| --- | --- | --- | --- | --- | --- |
+| `0-LedToggling` | GPIO output | Enable GPIOA and toggle PA5 / LD2 | [README](0-LedToggling/README.md) | [Local HTML](0-LedToggling/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/0-LedToggling/) |
+| `1-ButtonLedControl` | GPIO input/output | Read PC13 user button and drive PA5 LED | [README](1-ButtonLedControl/README.md) | [Local HTML](1-ButtonLedControl/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/1-ButtonLedControl/) |
+| `2-UartTx` | USART2 transmit | Send ASCII `A` on PA2 at 9600 baud | [README](2-UartTx/README.md) | [Local HTML](2-UartTx/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/2-UartTx/) |
+| `3-ADC` | ADC1 | Read internal temperature sensor channel 16 | [README](3-ADC/README.md) | [Local HTML](3-ADC/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/3-ADC/) |
+| `4-UartTxRx` | USART2 transmit/receive | Receive terminal text on PA3 and echo it on PA2 | [README](4-UartTxRx/README.md) | [Local HTML](4-UartTxRx/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/4-UartTxRx/) |
 <!-- MODULE_INDEX_END -->
 
 Each peripheral README includes:
