@@ -248,7 +248,7 @@ Project > Clean...
 
 Screenshot placeholder:
 
-![STM32CubeIDE clean project dialog](../docs/images/stm32cubeide-clean-project-dialog.png)
+![STM32CubeIDE clean build proof](../docs/images/stm32cubeide-clean-build-final-proof.png)
 
 Select:
 
@@ -264,7 +264,7 @@ Right-click 2-UartTx > Build Project
 
 Screenshot placeholder:
 
-![STM32CubeIDE build project command](../docs/images/stm32cubeide-build-project-command.png)
+![STM32CubeIDE build project command](../docs/images/stm32cubeide-context-build-project.png)
 
 A successful build ends with:
 
@@ -285,7 +285,7 @@ Build Configurations > Set Active > Debug
 
 Screenshot placeholder:
 
-![STM32CubeIDE set active debug configuration](../docs/images/stm32cubeide-set-active-debug-configuration.png)
+![STM32CubeIDE set active build configuration](../docs/images/stm32cubeide-build-config-set-active-release.png)
 
 Then:
 
@@ -296,7 +296,7 @@ Debug As > STM32 Cortex-M C/C++ Application
 
 Screenshot placeholder:
 
-![STM32CubeIDE debug as STM32 Cortex-M application](../docs/images/stm32cubeide-debug-as-cortex-m-application.png)
+![STM32CubeIDE run as STM32 C/C++ application](../docs/images/stm32cubeide-context-run-as-application.png)
 
 Recommended debug settings:
 
@@ -309,7 +309,7 @@ SWV:         Disabled
 
 Screenshot placeholder:
 
-![STM32CubeIDE debug configuration settings](../docs/images/stm32cubeide-debug-configuration-settings.png)
+![STM32CubeIDE debug configuration settings](../docs/images/stm32cubeide-edit-launch-configuration-release-elf.png)
 
 Before debugging from CubeIDE, STM32CubeProgrammer should be able to detect the ST-LINK. If STM32CubeProgrammer reports `No ST-LINK detected`, CubeIDE will not be able to flash.
 

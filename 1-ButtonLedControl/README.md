@@ -165,9 +165,10 @@ Right-click 1-ButtonLedControl > Build Project
 Right-click 1-ButtonLedControl > Debug As > STM32 Cortex-M C/C++ Application
 ```
 
-![Button LED clean project](../docs/images/1-buttonledcontrol-clean-project.png)
-![Button LED build project](../docs/images/1-buttonledcontrol-build-project.png)
-![Button LED debug configuration](../docs/images/1-buttonledcontrol-debug-configuration.png)
+![Set active build configuration](../docs/images/stm32cubeide-build-config-set-active-release.png)
+![Build selected project](../docs/images/stm32cubeide-context-build-project.png)
+![Run as STM32 application](../docs/images/stm32cubeide-context-run-as-application.png)
+![Clean build proof](../docs/images/stm32cubeide-clean-build-final-proof.png)
 
 ## Code Walkthrough
 

@@ -111,9 +111,10 @@ Right-click 0-LedToggling > Build Project
 Right-click 0-LedToggling > Debug As > STM32 Cortex-M C/C++ Application
 ```
 
-![LED clean project](../docs/images/0-ledtoggling-clean-project.png)
-![LED build project](../docs/images/0-ledtoggling-build-project.png)
-![LED debug configuration](../docs/images/0-ledtoggling-debug-configuration.png)
+![Set active build configuration](../docs/images/stm32cubeide-build-config-set-active-release.png)
+![Build selected project](../docs/images/stm32cubeide-context-build-project.png)
+![Run as STM32 application](../docs/images/stm32cubeide-context-run-as-application.png)
+![Clean build proof](../docs/images/stm32cubeide-clean-build-final-proof.png)
 
 Expected build artifact:
 

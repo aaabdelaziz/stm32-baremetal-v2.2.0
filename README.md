@@ -25,7 +25,9 @@ Style:      Bare-metal register programming
 ├── 4-UartTxRx/
 ├── chip_headers/
 ├── docs/
-│   └── images/
+│   ├── images/
+│   └── tools/
+├── documentation.html
 └── README.md
 ```
 
@@ -33,13 +35,15 @@ Style:      Bare-metal register programming
 
 ## Peripheral Guides
 
-| Project | Peripheral | What It Demonstrates | Dedicated Guide |
-| --- | --- | --- | --- |
-| `0-LedToggling` | GPIO output | Enable GPIOA and toggle PA5 / LD2 | [0-LedToggling/README.md](0-LedToggling/README.md) |
-| `1-ButtonLedControl` | GPIO input/output | Read PC13 user button and drive PA5 LED | [1-ButtonLedControl/README.md](1-ButtonLedControl/README.md) |
-| `2-UartTx` | USART2 transmit | Send ASCII `A` on PA2 at 9600 baud | [2-UartTx/README.md](2-UartTx/README.md) |
-| `3-ADC` | ADC1 | Read internal temperature sensor channel 16 | [3-ADC/README.md](3-ADC/README.md) |
-| `4-UartTxRx` | USART2 transmit/receive | Receive terminal text on PA3 and echo it on PA2 | [4-UartTxRx/README.md](4-UartTxRx/README.md) |
+<!-- MODULE_INDEX_START -->
+| Project | Peripheral | What It Demonstrates | README | HTML Guide |
+| --- | --- | --- | --- | --- |
+| `0-LedToggling` | GPIO output | Enable GPIOA and toggle PA5 / LD2 | [README](0-LedToggling/README.md) | [HTML](0-LedToggling/documentation.html) |
+| `1-ButtonLedControl` | GPIO input/output | Read PC13 user button and drive PA5 LED | [README](1-ButtonLedControl/README.md) | [HTML](1-ButtonLedControl/documentation.html) |
+| `2-UartTx` | USART2 transmit | Send ASCII `A` on PA2 at 9600 baud | [README](2-UartTx/README.md) | [HTML](2-UartTx/documentation.html) |
+| `3-ADC` | ADC1 | Read internal temperature sensor channel 16 | [README](3-ADC/README.md) | [HTML](3-ADC/documentation.html) |
+| `4-UartTxRx` | USART2 transmit/receive | Receive terminal text on PA3 and echo it on PA2 | [README](4-UartTxRx/README.md) | [HTML](4-UartTxRx/documentation.html) |
+<!-- MODULE_INDEX_END -->
 
 Each peripheral README includes:
 
@@ -52,6 +56,20 @@ Register-level code walkthrough
 Troubleshooting notes
 Screenshot placeholders under docs/images
 ```
+
+The browser-friendly documentation entry point is:
+
+[documentation.html](documentation.html)
+
+## Adding A New Peripheral Project
+
+When a new peripheral/module project is added, create its local `README.md`, then regenerate the module HTML pages:
+
+```console
+node docs/tools/generate-module-html.mjs
+```
+
+The generator scans numeric project folders such as `5-SpiTx/`, creates or refreshes `documentation.html` beside each module README, updates the root Peripheral Guides table, and updates the main [documentation.html](documentation.html) project cards.
 
 ## Troubleshooting History
 
@@ -344,9 +362,89 @@ Right-click project > Build Project
 Right-click project > Debug As > STM32 Cortex-M C/C++ Application
 ```
 
-![Clean project dialog](docs/images/stm32cubeide-clean-project-dialog.png)
-![Build project command](docs/images/stm32cubeide-build-project-command.png)
-![Debug as STM32 Cortex-M application](docs/images/stm32cubeide-debug-as-cortex-m-application.png)
+### 1. Select The Active Build Configuration
+
+Right-click the project you want to build, then choose:
+
+```console
+Build Configurations > Set Active > Debug
+```
+
+or:
+
+```console
+Build Configurations > Set Active > Release
+```
+
+![STM32CubeIDE set active build configuration](docs/images/stm32cubeide-build-config-set-active-release.png)
+
+The active configuration decides which output folder and ELF file CubeIDE generates:
+
+```console
+Debug/<project-name>.elf
+Release/<project-name>.elf
+```
+
+### 2. Build Only The Selected Project
+
+Right-click the project and choose:
+
+```console
+Build Project
+```
+
+![STM32CubeIDE build selected project](docs/images/stm32cubeide-context-build-project.png)
+
+You can also use the toolbar hammer button, but make sure the intended project/configuration is active first:
+
+![STM32CubeIDE toolbar build hammer](docs/images/stm32cubeide-toolbar-build-hammer.png)
+
+The expected result is:
+
+```console
+Build Finished. 0 errors, 0 warnings.
+```
+
+![STM32CubeIDE clean build console](docs/images/stm32cubeide-console-clean-build-zero-errors.png)
+
+Final clean build proof:
+
+![STM32CubeIDE final clean build proof](docs/images/stm32cubeide-clean-build-final-proof.png)
+
+### 3. Run Or Debug The Correct ELF
+
+Right-click the project and choose:
+
+```console
+Run As > STM32 C/C++ Application
+```
+
+or:
+
+```console
+Debug As > STM32 Cortex-M C/C++ Application
+```
+
+![STM32CubeIDE Run As STM32 application](docs/images/stm32cubeide-context-run-as-application.png)
+
+If CubeIDE asks which binary to debug, choose the ELF that matches the active configuration you built:
+
+```console
+Debug/<project-name>.elf
+Release/<project-name>.elf
+```
+
+![STM32CubeIDE choose release ELF](docs/images/stm32cubeide-choose-binary-debug-release-elf.png)
+
+If you need to edit the launch configuration manually, set:
+
+```console
+Project:             <project-name>
+C/C++ Application:   Release/<project-name>.elf
+Build Configuration: Select Automatically
+```
+
+![STM32CubeIDE launch configuration using Release ELF](docs/images/stm32cubeide-edit-launch-configuration-release-elf.png)
 
 Recommended debug settings:
 
@@ -357,7 +455,39 @@ Reset mode:  Connect under reset
 SWV:         Disabled
 ```
 
-![Debug configuration settings](docs/images/stm32cubeide-debug-configuration-settings.png)
+![Debug launch configuration settings](docs/images/stm32cubeide-edit-launch-configuration-release-elf.png)
+
+### 4. If Flashing Fails Before Download
+
+If CubeIDE shows:
+
+```console
+Error in final launch sequence:
+Failed to start GDB server
+```
+
+it got past "which ELF should I flash?" and failed before programming the target.
+
+![STM32CubeIDE failed to start GDB server](docs/images/stm32cubeide-error-failed-to-start-gdb-server.png)
+
+Check the console details. This message points to an ST-LINK connection problem, not a C build problem:
+
+```console
+libusb: info [darwin_claim_interface] no interface found
+Error in initializing ST-LINK device.
+Reason: Failed to connect to device.
+Please check power and cabling to target.
+```
+
+![STM32CubeIDE ST-LINK no interface found console](docs/images/stm32cubeide-console-stlink-no-interface-found.png)
+
+On macOS, allow the ST-LINK accessory when the system asks:
+
+![macOS allow ST-LINK accessory](docs/images/macos-allow-stlink-accessory.png)
+
+Then unplug and reconnect the board, use a known data USB cable, avoid USB hubs during debug, and retry. If the probe is detected but firmware is old or unknown, open the ST-LINK firmware updater and update the probe firmware.
+
+![ST-LINK firmware upgrade utility](docs/images/stlink-upgrade-device-detected.png)
 
 ## Documentation Images
 

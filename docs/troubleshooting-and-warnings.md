@@ -329,6 +329,10 @@ Failed to start GDB server
 
 CubeIDE could not start or connect to the ST-LINK GDB server.
 
+This dialog means CubeIDE got past the project build and the "which ELF?" selection, then failed before flashing because the ST-LINK GDB server could not initialize the probe.
+
+![STM32CubeIDE failed to start GDB server](images/stm32cubeide-error-failed-to-start-gdb-server.png)
+
 ### Common Causes
 
 ```console
@@ -339,6 +343,19 @@ ST-LINK server problem
 Board not powered
 Another debug session still using the probe
 ```
+
+The console may show details like:
+
+```console
+libusb: info [darwin_claim_interface] no interface found; setting configuration: 1
+Error in initializing ST-LINK device.
+Reason: Failed to connect to device. Please check power and cabling to target.
+libusb: error [darwin_claim_interface] could not set configuration
+```
+
+![STM32CubeIDE ST-LINK no interface found console](images/stm32cubeide-console-stlink-no-interface-found.png)
+
+In this case, the bundled GDB server executable may be installed correctly, but macOS/CubeProgrammer still cannot see the ST-LINK probe. That separates the problem from compiler settings: the ELF was produced, but the probe connection failed.
 
 ### Fix
 
@@ -361,6 +378,16 @@ Avoid USB hubs while debugging
 Stop old debug sessions
 Power-cycle the board
 ```
+
+On macOS, approve the accessory prompt if it appears:
+
+![macOS allow ST-LINK accessory](images/macos-allow-stlink-accessory.png)
+
+If the board appears after reconnecting but ST-LINK firmware is old or reported as unknown, open the ST-LINK firmware upgrade utility, refresh the device list, enter update mode if needed, and update the probe firmware:
+
+![ST-LINK firmware upgrade utility](images/stlink-upgrade-device-detected.png)
+
+After the probe is detected again, rebuild the project and launch the matching ELF.
 
 ## 4. `No ST-LINK detected`
 

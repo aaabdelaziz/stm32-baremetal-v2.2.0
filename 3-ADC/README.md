@@ -155,9 +155,10 @@ Right-click 3-ADC > Build Project
 Right-click 3-ADC > Debug As > STM32 Cortex-M C/C++ Application
 ```
 
-![ADC clean project](../docs/images/3-adc-clean-project.png)
-![ADC build project](../docs/images/3-adc-build-project.png)
-![ADC debug configuration](../docs/images/3-adc-debug-configuration.png)
+![Set active build configuration](../docs/images/stm32cubeide-build-config-set-active-release.png)
+![Build selected project](../docs/images/stm32cubeide-context-build-project.png)
+![Run as STM32 application](../docs/images/stm32cubeide-context-run-as-application.png)
+![Clean build proof](../docs/images/stm32cubeide-clean-build-final-proof.png)
 
 ## Code Walkthrough
 

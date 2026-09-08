@@ -227,6 +227,7 @@
       <a href="#overview">Overview</a>
       <a href="#projects">Projects</a>
       <a href="#cubeide">CubeIDE Setup</a>
+      <a href="#build-flash">Build / Flash</a>
       <a href="#uart">UART Testing</a>
       <a href="#warnings">Warnings</a>
       <a href="#git">Git Hygiene</a>
@@ -248,42 +249,44 @@
 
     <section id="projects">
       <h2>Peripheral Projects</h2>
+      <!-- MODULE_CARDS_START -->
       <div class="grid">
         <article class="project">
           <span class="tag">GPIO Output</span>
           <h3>0-LedToggling</h3>
           <p>Enables GPIOA and toggles PA5, which drives the Nucleo LD2 user LED.</p>
-          <p><a href="0-LedToggling/README.md">Open project README</a></p>
+          <p><a href="0-LedToggling/documentation.html">Open HTML guide</a> | <a href="0-LedToggling/README.md">README</a></p>
         </article>
 
         <article class="project">
           <span class="tag">GPIO Input/Output</span>
           <h3>1-ButtonLedControl</h3>
           <p>Reads PC13 user button input and controls PA5 LED output. The button is active-low.</p>
-          <p><a href="1-ButtonLedControl/README.md">Open project README</a></p>
+          <p><a href="1-ButtonLedControl/documentation.html">Open HTML guide</a> | <a href="1-ButtonLedControl/README.md">README</a></p>
         </article>
 
         <article class="project">
           <span class="tag">USART2 TX</span>
           <h3>2-UartTx</h3>
           <p>Configures USART2 on PA2/PA3 and transmits ASCII data at 9600 baud.</p>
-          <p><a href="2-UartTx/README.md">Open project README</a></p>
+          <p><a href="2-UartTx/documentation.html">Open HTML guide</a> | <a href="2-UartTx/README.md">README</a></p>
         </article>
 
         <article class="project">
           <span class="tag">ADC1</span>
           <h3>3-ADC</h3>
           <p>Enables ADC1 and reads the internal temperature sensor channel.</p>
-          <p><a href="3-ADC/README.md">Open project README</a></p>
+          <p><a href="3-ADC/documentation.html">Open HTML guide</a> | <a href="3-ADC/README.md">README</a></p>
         </article>
 
         <article class="project">
           <span class="tag">USART2 TX/RX</span>
           <h3>4-UartTxRx</h3>
           <p>Receives a terminal line on PA3 and echoes it back on PA2 with a simple blocking driver.</p>
-          <p><a href="4-UartTxRx/README.md">Open project README</a></p>
+          <p><a href="4-UartTxRx/documentation.html">Open HTML guide</a> | <a href="4-UartTxRx/README.md">README</a></p>
         </article>
       </div>
+<!-- MODULE_CARDS_END -->
     </section>
 
     <section id="cubeide">
@@ -439,6 +442,56 @@ GNU C</code></pre>
           <tr><td>5</td><td><code>C/C++ General &gt; Paths and Symbols</code></td><td>Mirror paths and symbols for the editor</td></tr>
         </tbody>
       </table>
+    </section>
+
+    <section id="build-flash">
+      <h2>Build, Run, And Flash</h2>
+      <p>Use this sequence whenever you switch projects or configurations. It prevents CubeIDE from flashing an old ELF or building a different project than the one you selected.</p>
+
+      <h3>Step 1: Select Active Configuration</h3>
+      <pre><code>Right-click project
+Build Configurations
+Set Active
+Debug or Release</code></pre>
+      <img class="proof" src="docs/images/stm32cubeide-build-config-set-active-release.png" alt="STM32CubeIDE set active Release build configuration">
+
+      <h3>Step 2: Build Selected Project</h3>
+      <pre><code>Right-click project
+Build Project</code></pre>
+      <img class="proof" src="docs/images/stm32cubeide-context-build-project.png" alt="STM32CubeIDE context menu Build Project">
+      <p>The toolbar hammer can also build, but the selected project and active configuration must be correct.</p>
+      <img class="proof" src="docs/images/stm32cubeide-toolbar-build-hammer.png" alt="STM32CubeIDE toolbar build hammer">
+
+      <h3>Step 3: Confirm Clean Console Output</h3>
+      <p>A clean build ends with <code>Build Finished. 0 errors, 0 warnings.</code></p>
+      <img class="proof" src="docs/images/stm32cubeide-console-clean-build-zero-errors.png" alt="STM32CubeIDE clean build console output">
+      <img class="proof" src="docs/images/stm32cubeide-clean-build-final-proof.png" alt="STM32CubeIDE final clean build proof">
+
+      <h3>Step 4: Run Or Debug The Project</h3>
+      <pre><code>Right-click project
+Run As
+STM32 C/C++ Application</code></pre>
+      <img class="proof" src="docs/images/stm32cubeide-context-run-as-application.png" alt="STM32CubeIDE Run As STM32 C/C++ Application">
+
+      <p>If CubeIDE asks for a binary, choose the ELF from the active configuration that you just built.</p>
+      <img class="proof" src="docs/images/stm32cubeide-choose-binary-debug-release-elf.png" alt="STM32CubeIDE choose Debug or Release ELF">
+
+      <p>In the launch configuration, the project and application must match.</p>
+      <pre><code>Project:           0-LedToggling
+C/C++ Application: Release/0-LedToggling.elf
+Build Configuration: Select Automatically</code></pre>
+      <img class="proof" src="docs/images/stm32cubeide-edit-launch-configuration-release-elf.png" alt="STM32CubeIDE edit launch configuration for Release ELF">
+
+      <h3>Step 5: Fix ST-LINK Before Retrying Flash</h3>
+      <p>If flashing fails with <code>Failed to start GDB server</code>, CubeIDE already found the ELF but could not initialize ST-LINK.</p>
+      <img class="proof" src="docs/images/stm32cubeide-error-failed-to-start-gdb-server.png" alt="STM32CubeIDE failed to start GDB server">
+      <img class="proof" src="docs/images/stm32cubeide-console-stlink-no-interface-found.png" alt="STM32CubeIDE ST-LINK no interface found console">
+
+      <p>On macOS, approve the ST-LINK accessory prompt, reconnect the board, and retry with a known data USB cable.</p>
+      <img class="proof" src="docs/images/macos-allow-stlink-accessory.png" alt="macOS allow ST-LINK accessory">
+
+      <p>If the probe appears but firmware is unknown or old, update ST-LINK firmware using the ST-LINK upgrade utility.</p>
+      <img class="proof" src="docs/images/stlink-upgrade-device-detected.png" alt="ST-LINK firmware upgrade utility">
     </section>
 
     <section id="uart">

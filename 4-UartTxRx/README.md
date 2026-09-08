@@ -134,9 +134,10 @@ Right-click 4-UartTxRx > Build Project
 Right-click 4-UartTxRx > Debug As > STM32 Cortex-M C/C++ Application
 ```
 
-![UART TX/RX clean project](../docs/images/4-uarttxrx-clean-project.png)
-![UART TX/RX build project](../docs/images/4-uarttxrx-build-project.png)
-![UART TX/RX debug configuration](../docs/images/4-uarttxrx-debug-configuration.png)
+![Set active build configuration](../docs/images/stm32cubeide-build-config-set-active-release.png)
+![Build selected project](../docs/images/stm32cubeide-context-build-project.png)
+![Run as STM32 application](../docs/images/stm32cubeide-context-run-as-application.png)
+![Clean build proof](../docs/images/stm32cubeide-clean-build-final-proof.png)
 
 Recommended debug settings:
 
