@@ -6,19 +6,22 @@
   <title>0 LedToggling Documentation</title>
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f4f7f8;
-      --panel: #ffffff;
-      --ink: #1c2430;
-      --muted: #5c6675;
-      --line: #d8e0e7;
-      --brand: #0f6674;
-      --brand-2: #2e7d61;
-      --accent: #b46621;
-      --code-bg: #101720;
-      --code-ink: #eaf0f4;
-      --soft: #eef6f4;
-      --shadow: 0 18px 45px rgba(28, 36, 48, 0.08);
+      color-scheme: dark;
+      --bg: #081116;
+      --bg-2: #0d1b22;
+      --panel: #101b22;
+      --panel-2: #14232c;
+      --ink: #e8f1f4;
+      --muted: #9fb1ba;
+      --line: #27404b;
+      --brand: #62d8c6;
+      --brand-2: #8fe388;
+      --accent: #f0b35a;
+      --danger: #ff7777;
+      --code-bg: #060b10;
+      --code-ink: #dff7ee;
+      --soft: #102a28;
+      --shadow: 0 20px 55px rgba(0, 0, 0, 0.34);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -28,21 +31,22 @@
       line-height: 1.6;
       color: var(--ink);
       background:
-        linear-gradient(180deg, #eef5f6 0, var(--bg) 310px),
+        linear-gradient(180deg, #112833 0, var(--bg) 360px),
+        linear-gradient(90deg, rgba(98, 216, 198, 0.08), rgba(240, 179, 90, 0.06)),
         var(--bg);
     }
     header {
-      background: #12232b;
+      background: linear-gradient(135deg, #0d1a22, #122c33 58%, #173225);
       color: #fff;
       padding: 42px 22px 34px;
-      border-bottom: 5px solid var(--brand-2);
+      border-bottom: 1px solid #2f605d;
     }
     header .wrap, main { max-width: 1080px; margin: 0 auto; }
     h1 { margin: 0 0 8px; font-size: clamp(30px, 4vw, 44px); line-height: 1.12; letter-spacing: 0; }
-    header p { margin: 0; color: #d7e4ea; }
+    header p { margin: 0; color: #bdd3d9; }
     main { padding: 24px 18px 52px; }
     nav {
-      background: var(--panel);
+      background: rgba(16, 27, 34, 0.92);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 12px 14px;
@@ -52,13 +56,13 @@
     a { color: var(--brand); font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--accent); }
     section {
-      background: var(--panel);
+      background: linear-gradient(180deg, rgba(20, 35, 44, 0.96), rgba(13, 25, 32, 0.96));
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: clamp(18px, 3vw, 30px);
       box-shadow: var(--shadow);
     }
-    h2 { margin: 28px 0 10px; color: #12313f; letter-spacing: 0; border-top: 1px solid var(--line); padding-top: 22px; }
+    h2 { margin: 28px 0 10px; color: #dff9f3; letter-spacing: 0; border-top: 1px solid var(--line); padding-top: 22px; }
     h2:first-of-type { border-top: 0; padding-top: 0; }
     h3, h4, h5 { margin: 22px 0 8px; letter-spacing: 0; }
     p { max-width: 82ch; }
@@ -66,17 +70,18 @@
     li { margin: 4px 0; }
     table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: 14px; border-radius: 8px; overflow: hidden; }
     th, td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
-    th { background: #e7f0f1; color: #163440; }
-    tr:nth-child(even) td { background: #fbfcfd; }
+    th { background: #15313a; color: #dff9f3; }
+    td { background: rgba(11, 22, 29, 0.7); }
+    tr:nth-child(even) td { background: rgba(17, 35, 43, 0.74); }
     code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.94em; }
-    :not(pre) > code { background: #edf3f5; color: #12313f; padding: 2px 5px; border-radius: 5px; }
+    :not(pre) > code { background: #18313a; color: #aef0df; padding: 2px 5px; border-radius: 5px; }
     pre {
       overflow-x: auto;
       background: var(--code-bg);
       color: var(--code-ink);
       padding: 16px;
       border-radius: 8px;
-      border: 1px solid #0b1220;
+      border: 1px solid #1d3a42;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
     }
     pre code { color: inherit; }
@@ -89,7 +94,7 @@
       box-shadow: 0 12px 30px rgba(28, 36, 48, 0.12);
     }
     .note {
-      color: #334155;
+      color: #c4d7dd;
       font-size: 14px;
       background: var(--soft);
       border-left: 4px solid var(--brand-2);
