@@ -22,6 +22,7 @@ Style:      Bare-metal register programming
 ├── 1-ButtonLedControl/
 ├── 2-UartTx/
 ├── 3-ADC/
+├── 4-UartTxRx/
 ├── chip_headers/
 ├── docs/
 │   └── images/
@@ -38,6 +39,7 @@ Style:      Bare-metal register programming
 | `1-ButtonLedControl` | GPIO input/output | Read PC13 user button and drive PA5 LED | [1-ButtonLedControl/README.md](1-ButtonLedControl/README.md) |
 | `2-UartTx` | USART2 transmit | Send ASCII `A` on PA2 at 9600 baud | [2-UartTx/README.md](2-UartTx/README.md) |
 | `3-ADC` | ADC1 | Read internal temperature sensor channel 16 | [3-ADC/README.md](3-ADC/README.md) |
+| `4-UartTxRx` | USART2 transmit/receive | Receive terminal text on PA3 and echo it on PA2 | [4-UartTxRx/README.md](4-UartTxRx/README.md) |
 
 Each peripheral README includes:
 
@@ -50,6 +52,12 @@ Register-level code walkthrough
 Troubleshooting notes
 Screenshot placeholders under docs/images
 ```
+
+## Troubleshooting History
+
+The full warning/error log with root causes and fixes is documented here:
+
+[docs/troubleshooting-and-warnings.md](docs/troubleshooting-and-warnings.md)
 
 ## Quick Start
 
@@ -68,6 +76,7 @@ Select the repository root and import:
 1-ButtonLedControl
 2-UartTx
 3-ADC
+4-UartTxRx
 chip_headers
 ```
 

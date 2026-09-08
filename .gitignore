@@ -24,6 +24,9 @@ subdir.mk
 *.tmp
 .DS_Store
 
+# Accidental duplicate CubeIDE launch configurations
+**/* (*).launch
+
 # Accidental nested legacy repo copies
 /bare-metal-stm32/
 /bare-metal-stm32_old/
