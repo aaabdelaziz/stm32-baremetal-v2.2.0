@@ -403,4 +403,9 @@ console.log("Updated documentation.html module cards");
 fs.copyFileSync(mainHtmlPath, path.join(root, "index.html"));
 console.log("Updated index.html GitHub Pages entry point");
 
+const documentationDir = path.join(root, "documentation");
+fs.mkdirSync(documentationDir, { recursive: true });
+fs.copyFileSync(mainHtmlPath, path.join(documentationDir, "index.html"));
+console.log("Updated documentation/index.html clean documentation route");
+
 console.log(`Generated ${modules.length} module HTML page(s).`);
