@@ -30,97 +30,9 @@ Expected:   LD2/user LED blinks
   STM32F091RCTX_FLASH.ld
 ```
 
-## STM32CubeIDE Import
+## STM32CubeIDE Setup
 
-For the full STM32CubeIDE v1.13-to-v2.2.0 import flow with screenshots, see the root repository README section:
-
-```console
-Import Old Projects Into STM32CubeIDE 2.2.0
-```
-
-```console
-File > Import... > General > Existing Projects into Workspace
-```
-
-![Import existing projects](../docs/images/stm32cubeide-import-02-existing-projects-wizard.png)
-
-Import:
-
-```console
-0-LedToggling
-```
-
-![Select projects and chip headers](../docs/images/stm32cubeide-import-05-select-projects-copy-to-workspace.png)
-
-## Include Paths
-
-This project uses local teaching headers from `0-LedToggling/Inc`.
-
-Configure the real compiler include paths:
-
-```console
-Right-click 0-LedToggling
-Properties
-C/C++ Build
-Settings
-Tool Settings
-MCU/MPU GCC Compiler
-Include paths
-```
-
-![LED compiler include paths page](../docs/images/0-ledtoggling-compiler-include-paths-page.png)
-
-Use:
-
-```console
-Configuration: All configurations
-```
-
-Add:
-
-```console
-../Inc
-```
-
-![LED compiler include paths](../docs/images/0-ledtoggling-compiler-include-paths.png)
-
-Optional editor/indexer path:
-
-```console
-Right-click 0-LedToggling
-Properties
-C/C++ General
-Paths and Symbols
-Includes
-GNU C
-```
-
-![LED indexer include paths](../docs/images/stm32cubeide-general-paths-and-symbols-includes-fixed.png)
-
-Add the same path:
-
-```console
-../Inc
-```
-
-## Build And Flash
-
-```console
-Project > Clean...
-Right-click 0-LedToggling > Build Project
-Right-click 0-LedToggling > Debug As > STM32 Cortex-M C/C++ Application
-```
-
-![Set active build configuration](../docs/images/stm32cubeide-build-config-set-active-release.png)
-![Build selected project](../docs/images/stm32cubeide-context-build-project.png)
-![Run as STM32 application](../docs/images/stm32cubeide-context-run-as-application.png)
-![Clean build proof](../docs/images/stm32cubeide-clean-build-final-proof.png)
-
-Expected build artifact:
-
-```console
-Debug/0-LedToggling.elf
-```
+For import, include paths, symbols, build, flash, and ST-LINK troubleshooting, use the shared setup guide in the root README: [STM32CubeIDE Settings](../README.md#required-stm32cubeide-settings) and [Build And Flash](../README.md#build-and-flash).
 
 ## Code Walkthrough
 
