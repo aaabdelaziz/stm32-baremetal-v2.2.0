@@ -55,7 +55,7 @@ File > Import... > General > Existing Projects into Workspace
 
 Screenshot placeholder:
 
-![STM32CubeIDE import existing projects](../docs/images/stm32cubeide-import-existing-projects.png)
+![STM32CubeIDE import existing projects](../docs/images/stm32cubeide-import-02-existing-projects-wizard.png)
 
 Import both:
 
@@ -66,7 +66,7 @@ chip_headers
 
 Screenshot placeholder:
 
-![STM32CubeIDE import 2-UartTx and chip_headers](../docs/images/stm32cubeide-import-uart-and-chip-headers.png)
+![STM32CubeIDE import projects and chip_headers](../docs/images/stm32cubeide-import-05-select-projects-copy-to-workspace.png)
 
 The `chip_headers` project/folder is required because `uart.h` includes:
 
@@ -92,7 +92,7 @@ Include paths
 
 Screenshot placeholder:
 
-![STM32CubeIDE compiler include paths page](../docs/images/stm32cubeide-compiler-include-paths-page.png)
+![STM32CubeIDE compiler include paths page](../docs/images/stm32cubeide-build-compiler-include-paths.png)
 
 Set:
 
@@ -147,9 +147,9 @@ MCU/MPU GCC Compiler
 Preprocessor
 ```
 
-Screenshot placeholder:
+This screenshot shows the correct page. If only `STM32F091RCTx` exists, add `STM32F091xC` as shown in the list below.
 
-![STM32CubeIDE compiler preprocessor symbols page](../docs/images/stm32cubeide-compiler-preprocessor-symbols-page.png)
+![STM32CubeIDE compiler preprocessor symbols page](../docs/images/stm32cubeide-build-compiler-preprocessor-missing-cmsis-symbol.png)
 
 Set:
 
@@ -203,7 +203,7 @@ GNU C
 
 Screenshot placeholder:
 
-![STM32CubeIDE indexer include paths page](../docs/images/stm32cubeide-indexer-include-paths-page.png)
+![STM32CubeIDE indexer include paths page](../docs/images/stm32cubeide-general-paths-and-symbols-includes-fixed.png)
 
 Add the same include paths:
 
@@ -221,7 +221,7 @@ C/C++ General > Paths and Symbols > Symbols > GNU C
 
 Screenshot placeholder:
 
-![STM32CubeIDE indexer symbols page](../docs/images/stm32cubeide-indexer-symbols-page.png)
+![STM32CubeIDE indexer symbols page](../docs/images/stm32cubeide-general-paths-and-symbols-symbols-missing-cmsis-symbol.png)
 
 Add:
 

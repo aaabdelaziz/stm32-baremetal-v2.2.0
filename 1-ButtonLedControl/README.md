@@ -50,7 +50,7 @@ Import Old Projects Into STM32CubeIDE 2.2.0
 File > Import... > General > Existing Projects into Workspace
 ```
 
-![Import existing projects](../docs/images/stm32cubeide-import-existing-projects.png)
+![Import existing projects](../docs/images/stm32cubeide-import-02-existing-projects-wizard.png)
 
 Import:
 
@@ -59,7 +59,7 @@ Import:
 chip_headers
 ```
 
-![Import Button LED project and chip headers](../docs/images/1-buttonledcontrol-import-project.png)
+![Select projects and chip headers](../docs/images/stm32cubeide-import-05-select-projects-copy-to-workspace.png)
 
 ## Required Compiler Include Paths
 
@@ -75,7 +75,7 @@ MCU/MPU GCC Compiler
 Include paths
 ```
 
-![Button LED compiler include paths page](../docs/images/1-buttonledcontrol-compiler-include-paths-page.png)
+![Button LED compiler include paths page](../docs/images/stm32cubeide-build-compiler-include-paths.png)
 
 Use:
 
@@ -116,7 +116,9 @@ MCU/MPU GCC Compiler
 Preprocessor
 ```
 
-![Button LED preprocessor symbols page](../docs/images/1-buttonledcontrol-preprocessor-symbols-page.png)
+This screenshot shows the correct page. If only `STM32F091RCTx` exists, add `STM32F091xC` as shown in the list below.
+
+![Button LED preprocessor symbols page](../docs/images/stm32cubeide-build-compiler-preprocessor-missing-cmsis-symbol.png)
 
 Add:
 
@@ -145,7 +147,7 @@ Includes
 GNU C
 ```
 
-![Button LED indexer include paths](../docs/images/1-buttonledcontrol-indexer-include-paths.png)
+![Button LED indexer include paths](../docs/images/stm32cubeide-general-paths-and-symbols-includes-fixed.png)
 
 Add the same include paths, then add `STM32F091xC` under:
 
@@ -153,7 +155,7 @@ Add the same include paths, then add `STM32F091xC` under:
 C/C++ General > Paths and Symbols > Symbols > GNU C
 ```
 
-![Button LED indexer symbols](../docs/images/1-buttonledcontrol-indexer-symbols.png)
+![Button LED indexer symbols](../docs/images/stm32cubeide-general-paths-and-symbols-symbols-missing-cmsis-symbol.png)
 
 ## Build And Flash
 

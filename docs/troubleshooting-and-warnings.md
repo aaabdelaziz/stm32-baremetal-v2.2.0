@@ -59,6 +59,151 @@ ${workspace_loc:/chip_headers/CMSIS/Include}
 
 `C/C++ General > Paths and Symbols` is mostly for the editor/indexer. It helps autocomplete and red squiggles, but it does not replace the real build settings under `C/C++ Build`.
 
+## 1B. STM32CubeIDE Header Path Configuration: Build vs General
+
+STM32CubeIDE has two similar-looking places for include paths and symbols. They do not do the same job.
+
+This is the common header-resolution symptom:
+
+![STM32CubeIDE unresolved stm32f0xx.h example](images/stm32cubeide-header-not-indexed-example.png)
+
+| IDE Page | What It Controls | Affects Build? | Use It For |
+| --- | --- | --- | --- |
+| `C/C++ Build > Settings > Tool Settings > MCU/MPU GCC Compiler > Include paths` | Adds `-I` include folders to the real compiler command | Yes | Fixing `fatal error: stm32f0xx.h: No such file or directory` |
+| `C/C++ Build > Settings > Tool Settings > MCU/MPU GCC Compiler > Preprocessor` | Adds `-D` macros to the real compiler command | Yes | Selecting the STM32 device macro such as `STM32F091xC` |
+| `C/C++ General > Paths and Symbols > Includes` | Feeds the Eclipse CDT indexer | No | Autocomplete, code navigation, and false editor errors |
+| `C/C++ General > Paths and Symbols > Symbols` | Feeds the Eclipse CDT indexer | No | Helping the editor understand active `#ifdef` blocks |
+
+The short rule is:
+
+```console
+C/C++ Build   = compiler truth
+C/C++ General = editor/indexer view
+```
+
+If the project does not build, fix `C/C++ Build` first. After the build is correct, mirror the same paths and symbols in `C/C++ General` so the editor also looks clean.
+
+### Real Compiler Include Paths
+
+Use this page for actual build include paths:
+
+```console
+Right-click project
+Properties
+C/C++ Build
+Settings
+Tool Settings
+MCU/MPU GCC Compiler
+Include paths
+```
+
+Add:
+
+```console
+../Inc
+${workspace_loc:/chip_headers/CMSIS/Device/ST/STM32F0xx/Include}
+${workspace_loc:/chip_headers/CMSIS/Include}
+```
+
+![STM32CubeIDE C/C++ Build compiler include paths](images/stm32cubeide-build-compiler-include-paths.png)
+
+This is the setting that must be correct before `#include "stm32f0xx.h"` can compile.
+
+Important: the compiler path for the STM32F0 device header must end with `/Include`. If it stops at `STM32F0xx`, the compiler is still one folder too high.
+
+### Real Compiler Preprocessor Symbols
+
+Use this page for actual compiler `-D` symbols:
+
+```console
+Right-click project
+Properties
+C/C++ Build
+Settings
+Tool Settings
+MCU/MPU GCC Compiler
+Preprocessor
+Define symbols (-D)
+```
+
+This screenshot shows the correct page, but the build still needs the CMSIS macro `STM32F091xC`:
+
+![STM32CubeIDE compiler symbols missing STM32F091xC](images/stm32cubeide-build-compiler-preprocessor-missing-cmsis-symbol.png)
+
+Add:
+
+```console
+STM32
+STM32F0
+STM32F091RCTx
+STM32F091xC
+NUCLEO_F091RC
+```
+
+![STM32CubeIDE C/C++ Build compiler preprocessor symbols](images/stm32cubeide-c-cpp-build-compiler-preprocessor-symbols.png)
+
+The critical CMSIS device-selection symbol is `STM32F091xC`.
+
+### Editor Indexer Include Paths
+
+Use this page only after the real build settings are correct:
+
+```console
+Right-click project
+Properties
+C/C++ General
+Paths and Symbols
+Includes
+GNU C
+```
+
+![STM32CubeIDE C/C++ General Paths and Symbols includes](images/stm32cubeide-general-paths-and-symbols-includes-fixed.png)
+
+Add the same include folders used by the compiler:
+
+```console
+../Inc
+${workspace_loc:/chip_headers/CMSIS/Device/ST/STM32F0xx/Include}
+${workspace_loc:/chip_headers/CMSIS/Include}
+```
+
+This page helps the editor find headers. It does not repair a failed `arm-none-eabi-gcc` command if the compiler include paths are missing.
+
+### Editor Indexer Symbols
+
+For clean editor parsing, also mirror the important symbols here:
+
+```console
+Right-click project
+Properties
+C/C++ General
+Paths and Symbols
+Symbols
+GNU C
+```
+
+Add at least:
+
+```console
+STM32F091xC
+```
+
+This screenshot shows the indexer symbols page. If `STM32F091xC` is missing, add it here too:
+
+![STM32CubeIDE C/C++ General Paths and Symbols symbols](images/stm32cubeide-general-paths-and-symbols-symbols-missing-cmsis-symbol.png)
+
+You may also mirror `STM32`, `STM32F0`, `STM32F091RCTx`, and `NUCLEO_F091RC` for consistency.
+
+### Correct Order To Fix Header Problems
+
+| Order | Where | What To Set |
+| --- | --- | --- |
+| 1 | `C/C++ Build > MCU/MPU GCC Compiler > Include paths` | `../Inc`, CMSIS device include path, CMSIS core include path |
+| 2 | `C/C++ Build > MCU/MPU GCC Compiler > Preprocessor` | `STM32F091xC` and project symbols |
+| 3 | `Project > Clean...` | Clean the active configuration |
+| 4 | Build project | Confirm the compiler command succeeds |
+| 5 | `C/C++ General > Paths and Symbols` | Mirror paths and symbols for the editor |
+
 ## 1A. Importing Old STM32CubeIDE Projects Into v2.2.0
 
 ### Symptom

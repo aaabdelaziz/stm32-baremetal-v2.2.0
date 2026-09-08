@@ -51,7 +51,7 @@ Import Old Projects Into STM32CubeIDE 2.2.0
 File > Import... > General > Existing Projects into Workspace
 ```
 
-![Import existing projects](../docs/images/stm32cubeide-import-existing-projects.png)
+![Import existing projects](../docs/images/stm32cubeide-import-02-existing-projects-wizard.png)
 
 Import both:
 
@@ -60,7 +60,7 @@ Import both:
 chip_headers
 ```
 
-![Import UART TX/RX project](../docs/images/4-uarttxrx-import-project.png)
+![Select projects and chip headers](../docs/images/stm32cubeide-import-05-select-projects-copy-to-workspace.png)
 
 ## Required Compiler Include Paths
 
@@ -76,7 +76,7 @@ MCU/MPU GCC Compiler
 Include paths
 ```
 
-![UART TX/RX compiler include paths page](../docs/images/4-uarttxrx-compiler-include-paths-page.png)
+![UART TX/RX compiler include paths page](../docs/images/stm32cubeide-build-compiler-include-paths.png)
 
 Use:
 
@@ -108,7 +108,9 @@ MCU/MPU GCC Compiler
 Preprocessor
 ```
 
-![UART TX/RX compiler symbols page](../docs/images/4-uarttxrx-preprocessor-symbols-page.png)
+This screenshot shows the correct page. If only `STM32F091RCTx` exists, add `STM32F091xC` as shown in the list below.
+
+![UART TX/RX compiler symbols page](../docs/images/stm32cubeide-build-compiler-preprocessor-missing-cmsis-symbol.png)
 
 Add:
 

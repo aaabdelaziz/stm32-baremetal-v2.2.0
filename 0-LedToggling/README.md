@@ -42,7 +42,7 @@ Import Old Projects Into STM32CubeIDE 2.2.0
 File > Import... > General > Existing Projects into Workspace
 ```
 
-![Import existing projects](../docs/images/stm32cubeide-import-existing-projects.png)
+![Import existing projects](../docs/images/stm32cubeide-import-02-existing-projects-wizard.png)
 
 Import:
 
@@ -50,7 +50,7 @@ Import:
 0-LedToggling
 ```
 
-![Import LED toggling project](../docs/images/0-ledtoggling-import-project.png)
+![Select projects and chip headers](../docs/images/stm32cubeide-import-05-select-projects-copy-to-workspace.png)
 
 ## Include Paths
 
@@ -95,7 +95,7 @@ Includes
 GNU C
 ```
 
-![LED indexer include paths](../docs/images/0-ledtoggling-indexer-include-paths.png)
+![LED indexer include paths](../docs/images/stm32cubeide-general-paths-and-symbols-includes-fixed.png)
 
 Add the same path:
 

@@ -51,7 +51,7 @@ Import Old Projects Into STM32CubeIDE 2.2.0
 File > Import... > General > Existing Projects into Workspace
 ```
 
-![Import existing projects](../docs/images/stm32cubeide-import-existing-projects.png)
+![Import existing projects](../docs/images/stm32cubeide-import-02-existing-projects-wizard.png)
 
 Import:
 
@@ -60,7 +60,7 @@ Import:
 chip_headers
 ```
 
-![Import ADC project and chip headers](../docs/images/3-adc-import-project.png)
+![Select projects and chip headers](../docs/images/stm32cubeide-import-05-select-projects-copy-to-workspace.png)
 
 ## Required Compiler Include Paths
 
@@ -76,7 +76,7 @@ MCU/MPU GCC Compiler
 Include paths
 ```
 
-![ADC compiler include paths page](../docs/images/3-adc-compiler-include-paths-page.png)
+![ADC compiler include paths page](../docs/images/stm32cubeide-build-compiler-include-paths.png)
 
 Use:
 
@@ -108,7 +108,9 @@ MCU/MPU GCC Compiler
 Preprocessor
 ```
 
-![ADC preprocessor symbols page](../docs/images/3-adc-preprocessor-symbols-page.png)
+This screenshot shows the correct page. If only `STM32F091RCTx` exists, add `STM32F091xC` as shown in the list below.
+
+![ADC preprocessor symbols page](../docs/images/stm32cubeide-build-compiler-preprocessor-missing-cmsis-symbol.png)
 
 Add:
 
@@ -135,7 +137,7 @@ Includes
 GNU C
 ```
 
-![ADC indexer include paths](../docs/images/3-adc-indexer-include-paths.png)
+![ADC indexer include paths](../docs/images/stm32cubeide-general-paths-and-symbols-includes-fixed.png)
 
 Add the same include paths and add `STM32F091xC` under:
 
@@ -143,7 +145,7 @@ Add the same include paths and add `STM32F091xC` under:
 C/C++ General > Paths and Symbols > Symbols > GNU C
 ```
 
-![ADC indexer symbols](../docs/images/3-adc-indexer-symbols.png)
+![ADC indexer symbols](../docs/images/stm32cubeide-general-paths-and-symbols-symbols-missing-cmsis-symbol.png)
 
 ## Build And Flash
 

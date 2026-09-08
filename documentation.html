@@ -316,7 +316,50 @@
       <p>After import, Project Explorer should show the firmware projects and <code>chip_headers</code>.</p>
       <img class="proof" src="docs/images/stm32cubeide-import-06-project-explorer-result.png" alt="STM32CubeIDE Project Explorer after import">
 
-      <h3>Compiler Include Paths</h3>
+      <h3>C/C++ Build vs C/C++ General</h3>
+      <p>STM32CubeIDE has two places that look similar. Use <code>C/C++ Build</code> for the real compiler and linker command. Use <code>C/C++ General</code> for the Eclipse editor/indexer view.</p>
+      <p>This is the typical symptom when <code>stm32f0xx.h</code> is not resolved correctly:</p>
+      <img class="proof" src="docs/images/stm32cubeide-header-not-indexed-example.png" alt="STM32CubeIDE unresolved stm32f0xx.h example">
+      <table>
+        <thead>
+          <tr>
+            <th>IDE page</th>
+            <th>What it controls</th>
+            <th>Affects build?</th>
+            <th>Use it for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>C/C++ Build &gt; MCU/MPU GCC Compiler &gt; Include paths</code></td>
+            <td>Real compiler <code>-I</code> include folders</td>
+            <td>Yes</td>
+            <td>Fixing missing header errors such as <code>stm32f0xx.h</code></td>
+          </tr>
+          <tr>
+            <td><code>C/C++ Build &gt; MCU/MPU GCC Compiler &gt; Preprocessor</code></td>
+            <td>Real compiler <code>-D</code> macros</td>
+            <td>Yes</td>
+            <td>Selecting the correct STM32 device macro</td>
+          </tr>
+          <tr>
+            <td><code>C/C++ General &gt; Paths and Symbols &gt; Includes</code></td>
+            <td>Eclipse CDT indexer include folders</td>
+            <td>No</td>
+            <td>Autocomplete, navigation, and editor squiggles</td>
+          </tr>
+          <tr>
+            <td><code>C/C++ General &gt; Paths and Symbols &gt; Symbols</code></td>
+            <td>Eclipse CDT indexer symbols</td>
+            <td>No</td>
+            <td>Helping the editor follow active <code>#ifdef</code> code</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="warn">When a build fails, fix <code>C/C++ Build</code> first. After the compiler is correct, mirror the same paths and symbols in <code>C/C++ General</code> so the editor also becomes clean.</div>
+
+      <h3>Real Compiler Include Paths</h3>
       <pre><code>Right-click project
 Properties
 C/C++ Build
@@ -329,9 +372,25 @@ Include paths</code></pre>
 ${workspace_loc:/chip_headers/CMSIS/Device/ST/STM32F0xx/Include}
 ${workspace_loc:/chip_headers/CMSIS/Include}</code></pre>
 
-      <div class="warn">Use <code>C/C++ Build</code> for real compiler settings. <code>C/C++ General</code> is mainly for the editor indexer.</div>
+      <img class="proof" src="docs/images/stm32cubeide-build-compiler-include-paths.png" alt="STM32CubeIDE C/C++ Build compiler include paths">
 
-      <h3>Compiler Symbols</h3>
+      <p>The final <code>/Include</code> folder is required because <code>stm32f0xx.h</code> lives inside that directory.</p>
+
+      <h3>Real Compiler Preprocessor Symbols</h3>
+      <pre><code>Right-click project
+Properties
+C/C++ Build
+Settings
+Tool Settings
+MCU/MPU GCC Compiler
+Preprocessor
+Define symbols (-D)</code></pre>
+
+      <p>This screenshot shows the correct page, but the build still needs the CMSIS symbol <code>STM32F091xC</code>.</p>
+      <img class="proof" src="docs/images/stm32cubeide-build-compiler-preprocessor-missing-cmsis-symbol.png" alt="STM32CubeIDE compiler symbols missing STM32F091xC">
+
+      <img class="proof" src="docs/images/stm32cubeide-c-cpp-build-compiler-preprocessor-symbols.png" alt="STM32CubeIDE C/C++ Build compiler preprocessor symbols">
+
       <pre><code>STM32
 STM32F0
 STM32F091RCTx
@@ -339,6 +398,47 @@ STM32F091xC
 NUCLEO_F091RC</code></pre>
 
       <p>The important CMSIS macro is <code>STM32F091xC</code>. The name <code>STM32F091RC</code> is not the macro used by <code>stm32f0xx.h</code>.</p>
+
+      <h3>Editor Indexer Include Paths</h3>
+      <pre><code>Right-click project
+Properties
+C/C++ General
+Paths and Symbols
+Includes
+GNU C</code></pre>
+
+      <img class="proof" src="docs/images/stm32cubeide-general-paths-and-symbols-includes-fixed.png" alt="STM32CubeIDE C/C++ General Paths and Symbols includes">
+
+      <p>Add the same include folders here for autocomplete and navigation. This page does not fix the compiler if <code>C/C++ Build</code> is missing the path.</p>
+
+      <h3>Editor Indexer Symbols</h3>
+      <pre><code>Right-click project
+Properties
+C/C++ General
+Paths and Symbols
+Symbols
+GNU C</code></pre>
+
+      <p>Add at least <code>STM32F091xC</code>. You may also mirror <code>STM32</code>, <code>STM32F0</code>, <code>STM32F091RCTx</code>, and <code>NUCLEO_F091RC</code>. This screenshot shows the indexer symbols page; if <code>STM32F091xC</code> is missing, add it here too.</p>
+      <img class="proof" src="docs/images/stm32cubeide-general-paths-and-symbols-symbols-missing-cmsis-symbol.png" alt="STM32CubeIDE C/C++ General Paths and Symbols symbols">
+
+      <h3>Configuration Order</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Where</th>
+            <th>What to set</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><code>C/C++ Build &gt; Include paths</code></td><td><code>../Inc</code>, CMSIS device include path, CMSIS core include path</td></tr>
+          <tr><td>2</td><td><code>C/C++ Build &gt; Preprocessor</code></td><td><code>STM32F091xC</code> and project symbols</td></tr>
+          <tr><td>3</td><td><code>Project &gt; Clean...</code></td><td>Clean the active configuration</td></tr>
+          <tr><td>4</td><td>Build project</td><td>Confirm <code>arm-none-eabi-gcc</code> succeeds</td></tr>
+          <tr><td>5</td><td><code>C/C++ General &gt; Paths and Symbols</code></td><td>Mirror paths and symbols for the editor</td></tr>
+        </tbody>
+      </table>
     </section>
 
     <section id="uart">
