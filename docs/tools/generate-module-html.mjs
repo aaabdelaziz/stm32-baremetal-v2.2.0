@@ -14,6 +14,12 @@ const modules = fs
   .filter((name) => fs.existsSync(path.join(root, name, "README.md")))
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
+const requestedModule = process.argv[2];
+if (requestedModule && !modules.includes(requestedModule)) {
+  throw new Error(`Unknown module: ${requestedModule}`);
+}
+const modulesToGenerate = requestedModule ? [requestedModule] : modules;
+
 const moduleMetadata = {
   "0-LedToggling": {
     peripheral: "GPIO output",
@@ -44,6 +50,12 @@ const moduleMetadata = {
     tag: "USART2 TX/RX",
     summary: "Receive terminal text on PA3 and echo it on PA2",
     card: "Receives a terminal line on PA3 and echoes it back on PA2 with a simple blocking driver.",
+  },
+  "9-CAN": {
+    peripheral: "bxCAN send/receive",
+    tag: "CAN TX/RX",
+    summary: "Transmit a standard frame and poll FIFO0 for received frames at 125 kbit/s",
+    card: "Configures STM32F091 bxCAN through CMSIS, periodically transmits ID 0x123, and polls FIFO0 for incoming frames at 125 kbit/s.",
   },
 };
 
@@ -167,6 +179,7 @@ function renderMarkdown(markdown) {
   let code = [];
   let inCode = false;
   let table = [];
+  let orderedItems = [];
 
   function flushParagraph() {
     if (!paragraph.length) return;
@@ -180,8 +193,15 @@ function renderMarkdown(markdown) {
     table = [];
   }
 
+  function flushOrderedList() {
+    if (!orderedItems.length) return;
+    html.push(`<ol>${orderedItems.map((item) => `<li>${inlineMarkdown(item)}</li>`).join("")}</ol>`);
+    orderedItems = [];
+  }
+
   for (const line of lines) {
     if (line.startsWith("```")) {
+      flushOrderedList();
       flushParagraph();
       flushTable();
       if (inCode) {
@@ -200,6 +220,7 @@ function renderMarkdown(markdown) {
     }
 
     if (/^\|.*\|$/.test(line.trim())) {
+      flushOrderedList();
       flushParagraph();
       table.push(line);
       continue;
@@ -209,11 +230,13 @@ function renderMarkdown(markdown) {
 
     if (!line.trim()) {
       flushParagraph();
+      flushOrderedList();
       continue;
     }
 
     const heading = line.match(/^(#{1,4})\s+(.+)$/);
     if (heading) {
+      flushOrderedList();
       flushParagraph();
       const level = Math.min(heading[1].length + 1, 5);
       html.push(`<h${level}>${inlineMarkdown(heading[2])}</h${level}>`);
@@ -222,6 +245,7 @@ function renderMarkdown(markdown) {
 
     const image = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
     if (image) {
+      flushOrderedList();
       flushParagraph();
       html.push(`<img class="proof" src="${escapeHtml(image[2])}" alt="${escapeHtml(image[1])}">`);
       continue;
@@ -229,16 +253,26 @@ function renderMarkdown(markdown) {
 
     const bullet = line.match(/^\s*[-*]\s+(.+)$/);
     if (bullet) {
+      flushOrderedList();
       flushParagraph();
       html.push(`<ul><li>${inlineMarkdown(bullet[1])}</li></ul>`);
       continue;
     }
 
+    const ordered = line.match(/^\s*\d+\.\s+(.+)$/);
+    if (ordered) {
+      flushParagraph();
+      orderedItems.push(ordered[1]);
+      continue;
+    }
+
+    flushOrderedList();
     paragraph.push(line.trim());
   }
 
   flushParagraph();
   flushTable();
+  flushOrderedList();
 
   return html.join("\n");
 }
@@ -377,7 +411,7 @@ ${body}
 `;
 }
 
-for (const moduleName of modules) {
+for (const moduleName of modulesToGenerate) {
   const readmePath = path.join(root, moduleName, "README.md");
   const documentationPath = path.join(root, moduleName, "documentation.html");
   const indexPath = path.join(root, moduleName, "index.html");
@@ -413,4 +447,4 @@ fs.mkdirSync(documentationDir, { recursive: true });
 fs.copyFileSync(mainHtmlPath, path.join(documentationDir, "index.html"));
 console.log("Updated documentation/index.html clean documentation route");
 
-console.log(`Generated ${modules.length} module HTML page(s).`);
+console.log(`Generated ${modulesToGenerate.length} module HTML page(s).`);
