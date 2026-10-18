@@ -31,3 +31,7 @@ subdir.mk
 /bare-metal-stm32/
 /bare-metal-stm32_old/
 /bare-metal-stm32*/
+
+# Local IDE workspace files at the repository root
+/.project
+/.vscode/
