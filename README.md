@@ -62,6 +62,9 @@ Style:      Bare-metal register programming
 | `2-UartTx` | USART2 transmit | Send ASCII `A` on PA2 at 9600 baud | [README](2-UartTx/README.md) | [Local HTML](2-UartTx/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/2-UartTx/) |
 | `3-ADC` | ADC1 | Read internal temperature sensor channel 16 | [README](3-ADC/README.md) | [Local HTML](3-ADC/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/3-ADC/) |
 | `4-UartTxRx` | USART2 transmit/receive | Receive terminal text on PA3 and echo it on PA2 | [README](4-UartTxRx/README.md) | [Local HTML](4-UartTxRx/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/4-UartTxRx/) |
+| `4-UartTxRxPrintf` | UartTxRxPrintf | This project extends the USART2 transmit example into a simple blocking UART RX/TX application. The firmware prints a ready message, waits for text from the host computer, then echoes the received line back with an `RX:` prefix. | [README](4-UartTxRxPrintf/README.md) | [Local HTML](4-UartTxRxPrintf/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/4-UartTxRxPrintf/) |
+| `5-Systick` | Systick | This project extends the USART2 transmit example into a simple blocking UART RX/TX application. The firmware prints a ready message, waits for text from the host computer, then echoes the received line back with an `RX:` prefix. | [README](5-Systick/README.md) | [Local HTML](5-Systick/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/5-Systick/) |
+| `9-CAN` | bxCAN send/receive | Transmit a standard frame and poll FIFO0 for received frames at 125 kbit/s | [README](9-CAN/README.md) | [Local HTML](9-CAN/index.html) | [GitHub Pages](https://aaabdelaziz.github.io/stm32-baremetal-v2.2.0/9-CAN/) |
 <!-- MODULE_INDEX_END -->
 
 Each peripheral README includes:
